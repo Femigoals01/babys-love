@@ -417,6 +417,24 @@ export default function Home() {
           font-weight: bold;
           text-decoration: none;
         }
+
+        @media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* Force 2 columns on mobile */
+    gap: 12px; /* Slightly smaller gap for small screens */
+  }
+
+  .card {
+    padding: 12px; /* Optional: slightly smaller card padding */
+  }
+
+  .card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+}
+
       `}</style>
     </div>
   )
