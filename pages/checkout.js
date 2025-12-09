@@ -1,4 +1,6 @@
 
+
+
 // // pages/checkout.js
 // import Head from 'next/head'
 // import Header from '../components/Header'
@@ -65,7 +67,25 @@
 //         history.push(orderData)
 //         localStorage.setItem("orders", JSON.stringify(history))
 
-//         // Send email
+//         // --- SEND TO SERVER ---
+//         try {
+//           fetch('/api/save-order', {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({
+//               reference: orderData.reference,
+//               items: orderData.items,
+//               total: orderData.total,
+//               name: orderData.name,
+//               email: orderData.email,
+//               phone: orderData.phone
+//             })
+//           }).catch(err => console.warn('save-order failed', err))
+//         } catch (err) {
+//           console.warn('save-order request error', err)
+//         }
+
+//         // Send email confirmation
 //         emailjs.send(
 //           process.env.NEXT_PUBLIC_EMAILJS_SERVICE,
 //           process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE,
@@ -80,12 +100,17 @@
 //           },
 //           process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 //         )
-
-//         clear()
-//         window.location.href = `/order-success?ref=${response.reference}`
+//         .then(() => console.log('Email sent successfully'))
+//         .catch(err => console.error('Email sending failed', err))
+//         .finally(() => {
+//           setLoading(false)
+//           clear()
+//           window.location.href = `/order-success?ref=${response.reference}`
+//         })
 //       },
 //       onClose: () => {
 //         alert("Payment cancelled")
+//         setLoading(false)
 //       }
 //     })
 
@@ -137,7 +162,6 @@
 
 
 
-// pages/checkout.js
 import Head from 'next/head'
 import Header from '../components/Header'
 import { useCart } from '../context/CartContext'
@@ -184,11 +208,11 @@ export default function CheckoutPage() {
         phone: form.phone
       },
       callback: function (response) {
-
+        // Prepare order object with customer details
         const orderData = {
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
+          customerName: form.name,
+          customerEmail: form.email,
+          customerMobile: form.phone,
           items,
           total: totalAmount / 100,
           reference: response.reference,
@@ -208,14 +232,7 @@ export default function CheckoutPage() {
           fetch('/api/save-order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              reference: orderData.reference,
-              items: orderData.items,
-              total: orderData.total,
-              name: orderData.name,
-              email: orderData.email,
-              phone: orderData.phone
-            })
+            body: JSON.stringify(orderData)
           }).catch(err => console.warn('save-order failed', err))
         } catch (err) {
           console.warn('save-order request error', err)
@@ -271,9 +288,24 @@ export default function CheckoutPage() {
         ) : (
           <div className="checkout-grid">
             <div className="checkout-form">
-              <input name="name" value={form.name} placeholder="Full Name" onChange={handleChange} />
-              <input name="email" value={form.email} placeholder="Email" onChange={handleChange} />
-              <input name="phone" value={form.phone} placeholder="Phone" onChange={handleChange} />
+              <input
+                name="name"
+                value={form.name}
+                placeholder="Full Name"
+                onChange={handleChange}
+              />
+              <input
+                name="email"
+                value={form.email}
+                placeholder="Email"
+                onChange={handleChange}
+              />
+              <input
+                name="phone"
+                value={form.phone}
+                placeholder="Phone"
+                onChange={handleChange}
+              />
 
               <button onClick={payWithPaystack} disabled={loading}>
                 {loading ? "Processing..." : "Pay Now"}
