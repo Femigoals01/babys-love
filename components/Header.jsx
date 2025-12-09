@@ -155,6 +155,178 @@
 // }
 
 
+
+// // components/Header.jsx
+// import Link from 'next/link'
+// import { useCart } from '../context/CartContext'
+// import Image from 'next/image'
+// import { useState } from 'react'
+
+// export default function Header() {
+//   const { cartCount } = useCart()
+//   const [menuOpen, setMenuOpen] = useState(false)
+
+//   const toggleMenu = () => setMenuOpen(!menuOpen)
+//   const closeMenu = () => setMenuOpen(false)
+
+//   return (
+//     <header className="header">
+//       <div className="header-inner container">
+//         {/* Logo */}
+//         <div className="logo">
+//           <Image src="/babylove-logo.png" alt="Baby's Love Logo" width={60} height={60} />
+//           <Link href="/" className="logo-link">Baby's Love</Link>
+//         </div>
+
+//         {/* Desktop Navigation */}
+//         <ul className="desktop-menu">
+//           <li><Link href="/" className="nav-link">Home</Link></li>
+//           <li><Link href="/products" className="nav-link">Products</Link></li>
+//           <li><Link href="/cart" className="nav-link">
+//             Cart {cartCount > 0 && <span className="cart-count">({cartCount})</span>}
+//           </Link></li>
+//           <li><Link href="/checkout" className="nav-link">Checkout</Link></li>
+//           <li><Link href="/order-history" className="nav-link">Order History</Link></li>
+//           <li><Link href="/track-order" className="nav-link">Track Order</Link></li>
+//         </ul>
+
+//         {/* Mobile Icons */}
+//         <div className="mobile-icons">
+//           <Link href="/cart" className="nav-link cart-icon">
+//             🛒 {cartCount > 0 && <span className="cart-count">({cartCount})</span>}
+//           </Link>
+//           <button className="menu-btn" onClick={toggleMenu}>☰</button>
+//         </div>
+//       </div>
+
+//       {/* Mobile Dropdown */}
+//       {menuOpen && (
+//         <div className="mobile-dropdown" onClick={closeMenu}>
+//           <ul onClick={e => e.stopPropagation()}>
+//             <li><Link href="/" className="nav-link" onClick={closeMenu}>Home</Link></li>
+//             <li><Link href="/products" className="nav-link" onClick={closeMenu}>Products</Link></li>
+//             <li><Link href="/checkout" className="nav-link" onClick={closeMenu}>Checkout</Link></li>
+//             <li><Link href="/order-history" className="nav-link" onClick={closeMenu}>Order History</Link></li>
+//             <li><Link href="/track-order" className="nav-link" onClick={closeMenu}>Track Order</Link></li>
+//           </ul>
+//         </div>
+//       )}
+
+//       <style jsx>{`
+//         /* Full-width header background */
+//         .header {
+//           width: 100%;
+//           background: #fff0f6;
+//           border-bottom: 2px solid #f8bbd0;
+//           position: sticky;
+//           top: 0;
+//           z-index: 1000;
+//         }
+
+//         /* Inner container aligns content with page */
+//         .header-inner {
+//           display: flex;
+//           justify-content: space-between;
+//           align-items: center;
+//           padding: 1rem 0;
+//           max-width: var(--max);
+//           margin: 0 auto;
+//           padding-left: 24px;
+//           padding-right: 24px;
+//         }
+
+//         .logo {
+//           display: flex;
+//           align-items: center;
+//           gap: 8px;
+//         }
+
+//         .logo-link {
+//           font-size: 1.7rem;
+//           font-weight: 700;
+//           color: #e91e63;
+//           text-decoration: none;
+//         }
+
+//         .desktop-menu {
+//           display: flex;
+//           gap: 2rem;
+//           list-style: none;
+//         }
+
+//         .nav-link {
+//           font-weight: 600;
+//           font-size: 1rem;
+//           text-decoration: none;
+//           color: #333;
+//           transition: color 0.3s;
+//         }
+
+//         .nav-link:hover {
+//           color: #e91e63;
+//         }
+
+//         .cart-count {
+//           font-weight: 700;
+//           color: #e91e63;
+//           margin-left: 0.2rem;
+//         }
+
+//         .menu-btn {
+//           display: none;
+//           border: none;
+//           background: none;
+//           font-size: 1.8rem;
+//           cursor: pointer;
+//         }
+
+//         .mobile-dropdown {
+//           position: absolute;
+//           top: 100%;
+//           right: 0;
+//           background: rgba(255, 255, 255, 0.95);
+//           border: 1px solid #f8bbd0;
+//           border-radius: 10px;
+//           padding: 1rem 1.5rem;
+//           box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+//           backdrop-filter: blur(10px);
+//           z-index: 2000;
+//         }
+
+//         .mobile-dropdown ul {
+//           display: flex;
+//           flex-direction: column;
+//           gap: 1rem;
+//         }
+
+//         .mobile-icons {
+//           display: none;
+//           gap: 1rem;
+//           align-items: center;
+//         }
+
+//         .cart-icon {
+//           font-weight: bold;
+//         }
+
+//         /* Responsive */
+//         @media (max-width: 768px) {
+//           .desktop-menu {
+//             display: none;
+//           }
+//           .menu-btn {
+//             display: block;
+//           }
+//           .mobile-icons {
+//             display: flex;
+//           }
+//         }
+//       `}</style>
+//     </header>
+//   )
+// }
+
+
 // components/Header.jsx
 import Link from 'next/link'
 import { useCart } from '../context/CartContext'
@@ -170,31 +342,34 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className="logo">
-        <Image src="/babylove-logo.png" alt="Baby's Love Logo" width={60} height={60} />
-        <Link href="/" className="logo-link">Baby's Love</Link>
-      </div>
+      <div className="header-inner">
+        {/* Logo */}
+        <div className="logo">
+          <Image src="/babylove-logo.png" alt="Baby's Love Logo" width={60} height={60} />
+          <Link href="/" className="logo-link">Baby's Love</Link>
+        </div>
 
-      {/* Desktop Navigation */}
-      <ul className="desktop-menu">
-        <li><Link href="/" className="nav-link">Home</Link></li>
-        <li><Link href="/products" className="nav-link">Products</Link></li>
-        <li>
-          <Link href="/cart" className="nav-link">
-            Cart {cartCount > 0 && <span className="cart-count">({cartCount})</span>}
+        {/* Desktop Navigation */}
+        <ul className="desktop-menu">
+          <li><Link href="/" className="nav-link">Home</Link></li>
+          <li><Link href="/products" className="nav-link">Products</Link></li>
+          <li>
+            <Link href="/cart" className="nav-link">
+              Cart {cartCount > 0 && <span className="cart-count">({cartCount})</span>}
+            </Link>
+          </li>
+          <li><Link href="/checkout" className="nav-link">Checkout</Link></li>
+          <li><Link href="/order-history" className="nav-link">Order History</Link></li>
+          <li><Link href="/track-order" className="nav-link">Track Order</Link></li>
+        </ul>
+
+        {/* Mobile Icons */}
+        <div className="mobile-icons">
+          <Link href="/cart" className="nav-link cart-icon">
+            🛒 {cartCount > 0 && <span className="cart-count">({cartCount})</span>}
           </Link>
-        </li>
-        <li><Link href="/checkout" className="nav-link">Checkout</Link></li>
-        <li><Link href="/order-history" className="nav-link">Order History</Link></li>
-        <li><Link href="/track-order" className="nav-link">Track Order</Link></li>
-      </ul>
-
-      {/* Mobile Icons */}
-      <div className="mobile-icons">
-        <Link href="/cart" className="nav-link cart-icon">
-          🛒 {cartCount > 0 && <span className="cart-count">({cartCount})</span>}
-        </Link>
-        <button className="menu-btn" onClick={toggleMenu}>☰</button>
+          <button className="menu-btn" onClick={toggleMenu}>☰</button>
+        </div>
       </div>
 
       {/* Mobile Dropdown */}
@@ -211,11 +386,9 @@ export default function Header() {
       )}
 
       <style jsx>{`
+        /* Full-width header background */
         .header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem 2rem;
+          width: 100%;
           background: #fff0f6;
           border-bottom: 2px solid #f8bbd0;
           position: sticky;
@@ -223,6 +396,17 @@ export default function Header() {
           z-index: 1000;
         }
 
+        /* Inner container to control max-width */
+        .header-inner {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem 24px;
+          max-width: var(--max);
+          margin: 0 auto;
+        }
+
+        /* Logo */
         .logo-link {
           font-size: 1.7rem;
           font-weight: 700;
@@ -230,12 +414,7 @@ export default function Header() {
           text-decoration: none;
         }
 
-        nav ul {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
+        /* Desktop Menu */
         .desktop-menu {
           display: flex;
           gap: 2rem;
@@ -260,6 +439,17 @@ export default function Header() {
           margin-left: 0.2rem;
         }
 
+        /* Mobile Icons */
+        .mobile-icons {
+          display: none;
+          gap: 1rem;
+          align-items: center;
+        }
+
+        .cart-icon {
+          font-weight: bold;
+        }
+
         .menu-btn {
           display: none;
           border: none;
@@ -268,6 +458,7 @@ export default function Header() {
           cursor: pointer;
         }
 
+        /* Mobile Dropdown */
         .mobile-dropdown {
           position: absolute;
           top: 100%;
@@ -287,28 +478,30 @@ export default function Header() {
           gap: 1rem;
         }
 
-        /* Mobile Icons */
-        .mobile-icons {
-          display: none;
-          gap: 1rem;
-          align-items: center;
-        }
-
-        .cart-icon {
-          font-weight: bold;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-          .desktop-menu {
-            display: none;
-          }
-          .menu-btn {
-            display: block;
-          }
-          .mobile-icons {
-            display: flex;
-          }
-        }
+  .desktop-menu {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .mobile-icons {
+    display: flex;
+  }
+
+  .header-inner {
+  width: 100%;
+  max-width: 100% !important;
+  padding: 0 16px;
+  margin: 0;
+}
+
+
+
+}
       `}</style>
     </header>
   )
