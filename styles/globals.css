@@ -6,11 +6,10 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
 /* .header .container{display:flex;align-items:center;justify-content:space-between} */
 
 
-
 .brand{font-weight:700;font-size:20px}
 nav a{margin-left:16px; text-decoration: none; font-weight: 600;}
 
-.nav-link{margin-left:16px; text-decoration: none; font-weight: 600;}
+.nav-link{margin-left:16px; text-decoration: none; font-weight: 600;  color: #000000;}
 .nav-link:hover {color: #e91e63; }
 
 .hero{padding:48px 0;text-align:center}
@@ -25,6 +24,21 @@ nav a{margin-left:16px; text-decoration: none; font-weight: 600;}
 .cart-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f2f2f2}
 .logo-link{text-decoration:none;color:#111;font-weight:700;font-size:20px}
 .logo{display: flex; gap: 5px; align-items: center; }
+
+.footer-video {
+  width: 100%;
+  max-width: 400px;   
+  border-radius: 10px;
+  margin-top: 12px;
+  background: white;
+}
+
+.footer-link {
+        text-decoration: none;
+        color: #000000;
+        }
+
+
 .checkout-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
