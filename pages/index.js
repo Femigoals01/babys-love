@@ -24,7 +24,7 @@ export default function Home() {
     const sortedCategories = Object.keys(productsByCategory).sort()
 
     return (
-        <div>
+        <div className='body-color'>
             <Head>
                 <title>Baby's Love — Home</title>
             </Head>
